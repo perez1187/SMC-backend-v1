@@ -1,0 +1,9 @@
+{
+    "first_name": "John",
+    "last_name": "Mam",
+    "email": "user3@google.com",
+    "password": "1234"
+}
+
+admin@gmail.com
+admin
