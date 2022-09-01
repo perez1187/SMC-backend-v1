@@ -12,6 +12,13 @@ serializer.py
     1. RegisterSerializer (for create an account)
     2. AuthTokenSerializer (for login)
 
+views.py
+    1. login_api for login 
+    2. get_user_data
+    3. register_api for register new user
+
+    inactive:
+    RegisterApi
 
 admin@gmail.com
 admin

@@ -1,10 +1,17 @@
+# from django
 from django.urls import path
 
+# from local
 from . import views
+
+# from 3rd parties
+from knox import views as knox_views
 
 # api/
 urlpatterns = [
     path('register/', views.register_api, name="Register"),
     path('login/', views.login_api),
     path('user/', views.get_user_data),
+    path('logout/', knox_views.LogoutView.as_view()),
+    path('logoutall/', knox_views.LogoutAllView.as_view())
 ]
