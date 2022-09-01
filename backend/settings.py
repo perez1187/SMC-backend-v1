@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # 3rd parties
     'rest_framework',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,7 @@ AUTH_USER_MODEL = "user.User" # app and class from model
 # this is for APIs
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+}
