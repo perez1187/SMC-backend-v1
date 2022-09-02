@@ -25,3 +25,12 @@ admin
 rest 1234
 
 https://simpleit.rocks/python/django/adding-email-to-django-the-easiest-way/
+
+
+confirm email:
+user create an account
+auto login, token into cookies
+send email with address +  for example id
+if user is a create user than in models is_viried True
+
+we need to also check if he is already virified to not double check

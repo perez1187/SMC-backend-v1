@@ -106,8 +106,12 @@ def register_api(request):
         )
 
 class VerifyEmail(generics.GenericAPIView):
-    def get(self):
-        pass
+    def get(self, request):
+        token = request.GET.get('token')
+        # token = request.query_params['token']
+        print(' ten token wolasz', token)
+
+
 
 # this clas is not active:
 class RegisterApi(views.APIView):

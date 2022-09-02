@@ -14,5 +14,5 @@ urlpatterns = [
     path('user/', views.get_user_data),
     path('logout/', knox_views.LogoutView.as_view()),
     path('logoutall/', knox_views.LogoutAllView.as_view()),
-    path('email-verify/', views.VerifyEmail.as_view(), name="email-verify"),
+    path('email-verify/<token>', views.VerifyEmail.as_view(), name="email-verify"),
 ]
