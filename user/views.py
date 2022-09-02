@@ -1,8 +1,13 @@
-from rest_framework import views, response, exceptions, permissions
+from rest_framework import views, response, exceptions, permissions, generics
 from rest_framework.decorators import api_view
 
 from . import serializer as user_serializer
 from knox.auth import AuthToken
+
+# sending email
+from django.core.mail import send_mail, EmailMessage
+
+from django.urls import reverse
 
 @api_view(['POST'])
 def login_api(request):
@@ -52,6 +57,43 @@ def register_api(request):
     serializer.is_valid(raise_exception=True)
 
     user = serializer.save()
+
+    created, token = AuthToken.objects.create(user) # insteaf create we can stay with _,
+
+    # with emaill add security-> send email only when user create
+
+    ''' sending email manualy'''
+    # send_mail(
+    #     'Subject here',
+    #     'Here is the message.',
+    #     'info@sharpmind.club',
+    #     ['o.perez1187@gmail.com'],
+    #     fail_silently=False,
+    # )
+    ''' sending email with a templete'''
+    msg = EmailMessage(
+        from_email='info@sharpmind.club',
+        to=['o.perez1187@gmail.com'],
+    )
+    # content
+    title_mail = 'Perez'
+    title_chess = 'my GM!'
+    verify_my_email = "VERIFY!"
+    my_site = "http://127.0.0.1:8000/"
+    absurl = "http://127.0.0.1:8000/email-verify/?token="+str(token)
+
+
+    msg.template_id = "d-c50d4fd610f944299e859d66d9d6201f"
+    msg.dynamic_template_data = {
+        "title": title_mail,
+        "title_chess":title_chess,
+        "verify_my_email":verify_my_email,
+        "my_site":my_site,
+        "verification_url":absurl,
+    }
+    msg.send(fail_silently=False)
+
+
     return response.Response ({
         'user_info': {
             'id': user.id,
@@ -59,9 +101,13 @@ def register_api(request):
             'last_name': user.last_name,
             'email': user.email
         }, 
-        'token': "token soon"
+        'token': token
         }
         )
+
+class VerifyEmail(generics.GenericAPIView):
+    def get(self):
+        pass
 
 # this clas is not active:
 class RegisterApi(views.APIView):
