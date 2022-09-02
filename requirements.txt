@@ -2,3 +2,5 @@ django
 djangorestframework
 django-cors-headers
 django-rest-knox
+django-sendgrid-v5
+python-decouple

@@ -23,3 +23,5 @@ views.py
 admin@gmail.com
 admin
 rest 1234
+
+https://simpleit.rocks/python/django/adding-email-to-django-the-easiest-way/
