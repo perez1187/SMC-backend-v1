@@ -10,3 +10,5 @@ class UserAdmin(admin.ModelAdmin): # he also write _UserAdmin
     )
 
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.UserProfile)
+

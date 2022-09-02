@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.db.models.signals import post_save
 
 '''
     1. we create a new User model base on Abstract User
     2. we create a new User Manager base on Base User Manager
+    3. in progress create signal for creating userr Profile
 '''
 
 class UserManager(auth_models.BaseUserManager):
@@ -64,3 +66,23 @@ class User(auth_models.AbstractUser):
 
     USERNAME_FIELD = "email" # we set email as login field
     REQUIRED_FIELDS= ['first_name', 'last_name']
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    ''' 
+        we can also one to one field like here
+        https://www.youtube.com/watch?v=Kc1Q_ayAeQk
+    '''
+
+    description= models.TextField(max_length=255, default='', blank=True)
+
+    def __str__(self):
+        return str(self.user)
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+        print("Profile created")
+
+post_save.connect(create_user_profile, User)

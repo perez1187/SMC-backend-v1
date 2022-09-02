@@ -1,4 +1,4 @@
-from rest_framework import views, response, exceptions, permissions, generics
+from rest_framework import views, response, exceptions, permissions, generics, viewsets
 from rest_framework.decorators import api_view
 
 from . import serializer as user_serializer
@@ -91,7 +91,7 @@ def register_api(request):
         "my_site":my_site,
         "verification_url":absurl,
     }
-    msg.send(fail_silently=False)
+    # msg.send(fail_silently=False)
 
 
     return response.Response ({
@@ -105,6 +105,10 @@ def register_api(request):
         }
         )
 
+
+
+
+# this class doesnt work
 class VerifyEmail(generics.GenericAPIView):
     def get(self, request):
         token = request.GET.get('token')

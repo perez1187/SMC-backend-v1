@@ -26,6 +26,8 @@ rest 1234
 
 https://simpleit.rocks/python/django/adding-email-to-django-the-easiest-way/
 
+signals:
+https://www.youtube.com/watch?v=Kc1Q_ayAeQk
 
 confirm email:
 user create an account

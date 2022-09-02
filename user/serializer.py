@@ -1,5 +1,5 @@
 from rest_framework import serializers, validators
-from . models import User
+from . models import User, UserProfile
 
 # for login
 from django.contrib.auth import authenticate
@@ -67,3 +67,20 @@ class AuthTokenSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+'''  
+    nested user profile
+'''
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('id', 'user', 'description')
+
+class UserSerializer(serializers.ModelSerializer):
+
+    profile = UserProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'profile')
